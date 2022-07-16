@@ -16,9 +16,9 @@ namespace Planetside2StatsAPI.Controllers
         }
 
         [HttpGet(Name = "GetPlayer")]
-        public PS2Player Get()
+        public PS2Player GetPlayer(string playerName)
         {
-            return DaybreakAPI.DaybreakAPI.GetPlayerAsync("braxor");
+            return DaybreakAPI.DaybreakAPI.GetPlayerAsync(playerName);
         }
     }
 }
