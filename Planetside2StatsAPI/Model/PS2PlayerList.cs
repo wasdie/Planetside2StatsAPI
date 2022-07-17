@@ -8,13 +8,13 @@
     public partial class PS2PlayerList
     {
         [JsonProperty("character_list")]
-        public PS2Player[] PS2Players { get; set; }
+        public PS2PlayerList[] PS2Players { get; set; }
 
         [JsonProperty("returned")]
         public long Returned { get; set; }
     }
 
-    public partial class PS2Player
+    public partial class PS2PlayerList
     {
        [JsonProperty("character_id")]
         public string CharacterId { get; set; }

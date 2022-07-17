@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Planetside2StatsAPI.Models;
+using Planetside2StatsAPI.Services;
 
 namespace Planetside2StatsAPI.Controllers
 {
@@ -7,18 +8,30 @@ namespace Planetside2StatsAPI.Controllers
     [Route("[controller]")]
     public class Planetside2GetPlayerController : ControllerBase
     {
+        private IDayBreakAPIAccess _daybreakAPI;
 
-        private readonly ILogger<Planetside2GetPlayerController> _logger;
-
-        public Planetside2GetPlayerController(ILogger<Planetside2GetPlayerController> logger)
+        public Planetside2GetPlayerController(IDayBreakAPIAccess daybreakAPI)
         {
-            _logger = logger;
+            _daybreakAPI = daybreakAPI;
         }
 
         [HttpGet(Name = "GetPlayer")]
-        public PS2Player GetPlayer(string playerName)
+        public PS2PlayerList GetPlayer(string playerName)
         {
-            return DaybreakAPI.DaybreakAPI.GetPlayerAsync(playerName);
+            return _daybreakAPI.GetPlayer(playerName);
         }
+
+        //[HttpGet(Name = "GetPlayerAsync")]
+        //public async Task<PS2PlayerList> GetPlayerAsync(string playername)
+        //{
+        //    var player = await _daybreakAPI.GetPlayerAsync(playername);
+
+        //    if (player == null)
+        //    {
+        //        throw new ArgumentException();
+        //    }
+
+        //    return player;
+        //}
     }
 }
